@@ -1,0 +1,56 @@
+{
+  "lsp": {
+    "deno": {
+      "settings": {
+        "deno": {
+          "enable": true
+        }
+      }
+    },
+    "json-language-server": {
+      "settings": {
+        "json": {
+          "schemas": [
+            {
+              "fileMatch": ["deno.json", "deno.jsonc"],
+              "url": "https://raw.githubusercontent.com/denoland/deno/refs/heads/main/cli/schemas/config-file.v1.json"
+            },
+            {
+              "fileMatch": ["package.json"],
+              "url": "https://www.schemastore.org/package"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "languages": {
+    "JSON": {
+      "language_servers": ["deno", "!json-language-server"],
+      "formatter": "language_server"
+    },
+    "JSONC": {
+      "language_servers": ["deno", "!json-language-server"],
+      "formatter": "language_server"
+    },
+    "JavaScript": {
+      "language_servers": ["deno"],
+      "formatter": "language_server"
+    },
+    "TypeScript": {
+      "language_servers": ["deno"],
+      "formatter": "language_server"
+    },
+    "TSX": {
+      "language_servers": ["deno"],
+      "formatter": "language_server"
+    }
+  },
+  "context_servers": {
+    "postgres-context-server": {
+      "settings": {
+        "database_url": "postgresql://root:root@localhost:5434/anarchy"
+      }
+    }
+  }
+}

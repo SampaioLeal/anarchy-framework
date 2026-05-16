@@ -1,0 +1,33 @@
+volumes:
+  anarchy_pg_vol:
+
+networks:
+  anarchy_net:
+    name: anarchy_net
+
+services:
+  anarchy_db:
+    container_name: anarchy_db
+    image: postgres:18-alpine
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB=anarchy
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    networks:
+      - anarchy_net
+    volumes:
+      - anarchy_pg_vol:/var/lib/postgresql
+  mcp_server:
+    container_name: anarchy_mcp
+    image: crystaldba/postgres-mcp
+    command: ["--access-mode=unrestricted", "--transport=sse"]
+    restart: always
+    ports:
+      - "8084:8000"
+    environment:
+      - DATABASE_URI=postgresql://root:root@anarchy_db:5432/anarchy
+    networks:
+      - anarchy_net
